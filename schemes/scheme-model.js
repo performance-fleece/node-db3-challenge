@@ -6,7 +6,8 @@ module.exports = {
   findSteps,
   add,
   update,
-  remove
+  remove,
+  addStep
 };
 
 function find() {
@@ -53,6 +54,15 @@ async function remove(id) {
     .then(() => {
       return item;
     });
+}
 
-  return item;
+function addStep(step, scheme_id) {
+  const schemeId = { scheme_id: scheme_id };
+  const newItem = { ...step, ...schemeId };
+
+  return db('steps')
+    .insert(newItem)
+    .then(() => {
+      return findSteps(scheme_id);
+    });
 }
