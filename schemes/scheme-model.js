@@ -19,9 +19,20 @@ function findById(id) {
     .first();
 }
 
-function findSteps(id) {}
+function findSteps(id) {
+  return db('steps as st')
+    .join('schemes as sc', 'sc.id', 'st.scheme_id')
+    .select('st.id', 'sc.scheme_name', 'st.step_number', 'st.instructions')
+    .where('st.scheme_id', id);
+}
 
-function add(scheme) {}
+function add(scheme) {
+  return db('schemes')
+    .insert(scheme)
+    .then(id => {
+      return findById(id[0]);
+    });
+}
 
 function update(changes, id) {}
 
