@@ -38,9 +38,21 @@ function update(changes, id) {
   return db('schemes')
     .where({ id })
     .update(changes)
-    .then(ids => {
+    .then(() => {
       return findById(id);
     });
 }
 
-function remove(id) {}
+async function remove(id) {
+  const item = await findById(id);
+
+  return db('schemes')
+    .select('schemes.scheme_name')
+    .where('id', id)
+    .del()
+    .then(() => {
+      return item;
+    });
+
+  return item;
+}
