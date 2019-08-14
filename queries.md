@@ -15,7 +15,7 @@ SELECT ProductName, Quantity FROM OrderDetails as o JOIN Products as p ON o.Prod
 ### Display the OrderID, CustomerName and the employee's LastName for every order. All columns should be labeled clearly. Displays 196 records.
 
 Select Orders.OrderID, Customers.CustomerName, Employees.LastName
-FROM Orders inner
+FROM Orders
 JOIN Employees on Orders.EmployeeID = Employees.EmployeeID
 JOIN Customers on Customers.CustomerID = Orders.CustomerID
 order by OrderID;
@@ -24,7 +24,7 @@ order by OrderID;
 
 SELECT CategoryName, Count(ProductName) as Count
 FROM Categories as c
-INNER JOIN products as p
+JOIN products as p
 ON c.CategoryID = p.CategoryID
 GROUP BY CategoryName;
 
